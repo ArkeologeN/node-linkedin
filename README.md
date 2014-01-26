@@ -44,3 +44,30 @@ app.get('/oauth/linkedin/callback', function(req, res) {
     });
 });
 ```
+
+## Companies
+
+Supports all the calls as per the documentation available at: [LinkedIn Companies API](http://developer.linkedin.com/documents/company-lookup-api-and-fields).
+
+```javascript
+
+linkedin.companies.company('162479', function(err, company) {
+    // Here you go
+});
+
+linkedin.companies.name('logica', function(err, company) {
+    // Here you go
+});
+
+linkedin.companies.email_domain('apple.com', function(err, company) {
+    // Here you go
+});
+
+linkedin.companies.multiple('162479,universal-name=linkedin', function(err, companies) {
+    // Here you go
+});
+
+linkedin.companies.asAdmin(function(err, companies) {
+    // Here you go
+});
+```
