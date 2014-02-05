@@ -3,7 +3,7 @@
  * @since   1/26/14
  */
 
-var linkedin = require('node-linkedinin')('75gyccfxufrozz', 'HKwSAPg0z7oGYfh5')
+var linkedin = require('node-linkedin')('75gyccfxufrozz', 'HKwSAPg0z7oGYfh5')
     token = process.env.IN_TOKEN;
 
 jasmine.getEnv().defaultTimeoutInterval = 20000;
@@ -22,11 +22,12 @@ describe('API: Companies Test Suite', function() {
     });
 
     it('should get company by universal name', function(done) {
-        linkedin.companies.name('logica', function(err, company) {
+        linkedin.companies.name('Logica', function(err, company) {
             expect(err).toBe(null);
             expect(company).not.toBe(null);
             expect(typeof company).toBe('object');
             expect(company.name).toBe('Logica');
+            console.log(JSON.stringify(company));
             done();
         });
     });
