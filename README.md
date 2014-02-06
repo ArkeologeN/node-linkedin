@@ -71,3 +71,17 @@ linkedin.companies.asAdmin(function(err, companies) {
     // Here you go
 });
 ```
+
+## Profile
+
+Searches for the profiles as per the criteria.
+
+```javascript
+linkedin.people.url('long_public_url_here', function(err, $in) {
+    // Returns dob, education 
+});
+
+linkedin.people.url('linkedin_id', function(err, $in) {
+    // Loads the profile by id.
+});
+```
