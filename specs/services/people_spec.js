@@ -11,14 +11,12 @@ jasmine.getEnv().defaultTimeoutInterval = 20000;
 linkedin = linkedin.init(token);
 
 describe('API: People Test Suite', function() {
-    it('should search people by facet', function(done) {
-        linkedin.people.search({'company-name': 'The Plumtree Group'}, function(err, results) {
-            if (err ) {
-                console.log(err);
-                done();
-            }
 
-            console.log(JSON.stringify(results));
-        });
+    it('should retrieve profile of current user', function() {
+       linkedin.people.me(function(err, data) {
+           console.log(JSON.stringify(data));
+           done();
+       }) ;
     });
+
 })
