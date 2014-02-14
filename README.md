@@ -77,6 +77,10 @@ linkedin.companies.asAdmin(function(err, companies) {
 Searches for the profiles as per the criteria.
 
 ```javascript
+linkedin.people.me(function(err, $in) {
+    // Loads the profile of access token owner.
+});
+
 linkedin.people.url('long_public_url_here', function(err, $in) {
     // Returns dob, education 
 });
