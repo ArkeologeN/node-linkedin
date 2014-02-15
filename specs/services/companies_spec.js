@@ -17,6 +17,7 @@ describe('API: Companies Test Suite', function() {
             expect(err).toBe(null);
             expect(company).not.toBe(null);
             expect(typeof company).toBe('object');
+            console.log(JSON.stringify(company))
             done();
         });
     });
@@ -27,7 +28,6 @@ describe('API: Companies Test Suite', function() {
             expect(company).not.toBe(null);
             expect(typeof company).toBe('object');
             expect(company.name).toBe('Logica');
-            console.log(JSON.stringify(company));
             done();
         });
     });
