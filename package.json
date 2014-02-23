@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/ArkeologeN/node-linkedin.git"
+    "url": "git@github.com:Kuew/node-linkedin.git"
   },
   "keywords": [
     "linkedin",
@@ -21,9 +21,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ArkeologeN/node-linkedin/issues"
+    "url": "https://github.com/Kuew/node-linkedin/issues"
   },
-  "homepage": "https://github.com/ArkeologeN/node-linkedin",
+  "homepage": "https://github.com/Kuew/node-linkedin",
   "dependencies": {
     "lodash": "~2.4.1",
     "request": "~2.31.0"
