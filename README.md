@@ -17,7 +17,14 @@ Just like others, its simple and quick as per standard:
 this will install the module and add the entry in `package.json`. Lets start using it!
 
 ```javascript
-var linkedin = require('node-linkedin')('api', 'secret', 'callback');
+var Linkedin = require('node-linkedin')('api', 'secret', 'callback');
+```
+
+Before invoking any endpoint, please get the instance ready with your access token.
+
+```javascript
+var linkedin = Linkedin.init('my_access_token');
+// Now, you're ready to use any endpoint
 ```
 
 ## OAuth 2.0
@@ -37,8 +44,9 @@ app.get('/oauth/linkedin/callback', function(req, res) {
         
         /**
          * Results have something like:
-         * {"expires_in":5184000,"access_token":"AQXdSP_W41_UPs5ioT_t8HESyODB4FqbkJ8LrV_5mff4gPODzOYR"}
-        */
+         * {"expires_in":5184000,"access_token":". . . ."}
+         */
+         
         console.log(results);
         return res.redirect('/');
     });
