@@ -36,11 +36,11 @@ We regret to use 1.0 for authentication and linkedin also supports 2.0. So lets 
 ```javascript
 app.get('/oauth/linkedin', function(req, res) {
     // This will ask for permisssions etc and redirect to callback url.
-    linkedin.authorize();
+    linkedin.auth.authorize(res, ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages']);
 });
 
 app.get('/oauth/linkedin/callback', function(req, res) {
-    linkedin.getAccessToken(req.query.code, function(err, results) {
+    linkedin.auth.getAccessToken(res, req.query.code, function(err, results) {
         if ( err )
             return console.error(err);
         
