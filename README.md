@@ -99,3 +99,18 @@ linkedin.people.url('linkedin_id', function(err, $in) {
     // Loads the profile by id.
 });
 ```
+
+## Connections
+
+Invokes LinkedIn's Connections API.
+
+```javascript
+linkedin.connections.retrieve(function(err, connections) {
+    // Here you go! Got your connections!
+});
+
+```
+
+## Author
+
+This wrapper has been written & currently under maintenance by [Hamza Waqas](http://github.com/ArkeologeN). He's using twitter at: [@HamzaWaqas](http://twitter.com/HamzaWaqas)
