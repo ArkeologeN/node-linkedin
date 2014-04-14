@@ -1,4 +1,4 @@
-var linkedin = require('node-linkedin')('75gyccfxufrozz', 'HKwSAPg0z7oGYfh5')
+var linkedin = require('../../')('75gyccfxufrozz', 'HKwSAPg0z7oGYfh5')
 token = process.env.IN_TOKEN;
 
 jasmine.getEnv().defaultTimeoutInterval = 20000;
@@ -18,4 +18,4 @@ describe('API: People Test Suite', function() {
 		});
 	});
 
-})
+});
