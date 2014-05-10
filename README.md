@@ -86,18 +86,47 @@ linkedin.companies.asAdmin(function(err, companies) {
 
 Searches for the profiles as per the criteria.
 
+### Logged In User Profile.
+
 ```javascript
 linkedin.people.me(function(err, $in) {
     // Loads the profile of access token owner.
 });
 
+OR
+
+linkedin.people.me(['id', 'first-name', 'last-name'], function(err, $in) {
+    // Loads the profile of access token owner.
+});
+```
+
+### Profile by Public URL.
+
+```javascript
 linkedin.people.url('long_public_url_here', function(err, $in) {
     // Returns dob, education 
 });
 
-linkedin.people.url('linkedin_id', function(err, $in) {
+OR
+
+linkedin.people.url('long_public_url_here', ['id', 'first-name', 'last-name'], function(err, $in) {
+    // Returns dob, education
+});
+```
+
+### Profile by Id.
+
+```javascript
+linkedin.people.id('linkedin_id', function(err, $in) {
     // Loads the profile by id.
 });
+
+OR
+
+linkedin.people.id('linkedin_id', ['id', 'first-name', 'last-name'], function(err, $in) {
+    // Loads the profile by id.
+});
+
 ```
 
 ## Connections
