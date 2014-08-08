@@ -1,6 +1,6 @@
 {
   "name": "node-linkedin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "LinkedIn 2.0 compatible wrapper in node.js",
   "main": "lib/main",
   "scripts": {
