@@ -29,6 +29,12 @@ var linkedin = Linkedin.init('my_access_token');
 // Now, you're ready to use any endpoint
 ```
 
+Additionally, you can specify a timeout in ms to use for the request. The default is 60 seconds.
+
+```javascript
+var linkedin = Linkedin.init('my_access_token', 10000 /* 10 seconds */ );
+```
+
 ## OAuth 2.0
 
 We regret to use 1.0 for authentication and linkedin also supports 2.0. So lets start using it. The below example is inspired from `express.js` but good enough to give the walkthrough.
