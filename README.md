@@ -148,6 +148,35 @@ linkedin.connections.retrieve(function(err, connections) {
 
 ```
 
+## Groups
+
+Implements wrapper for `LinkedIn Group API` and provides interface to invoke API endpoints.
+
+PS: For now, we just have feeds available.
+
+### Group discussions by Group ID
+```javascript
+linkedin.group.feeds(3769732, function(err, data) {
+    // data: variable is ready to use.
+});
+```
+
+OR If you want to have custom field selector, take a look at this;
+
+```javascript
+linkedin.group.feeds(3769732, ['field', 'field2', 'field3'] , function(err, data) {
+    // data: variable is ready to use.
+});
+```
+
+OR even if you want to have custom sorting parameters, you can just pass them as third argument:
+
+```javascript
+linkedin.group.feeds(3769732, ['field', 'field2', 'field3'], {order: 'popularity'}, function(err, data) {
+    // data: variable is ready to use.
+});
+```
+
 ## Author
 
 This wrapper has been written & currently under maintenance by [Hamza Waqas](http://github.com/ArkeologeN). He's using twitter at: [@HamzaWaqas](http://twitter.com/HamzaWaqas)
