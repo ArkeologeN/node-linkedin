@@ -3,7 +3,7 @@
  * @since   2/9/14
  */
 
-var linkedin = require('../../')('75gyccfxufrozz', 'HKwSAPg0z7oGYfh5')
+var linkedin = require('../../')('77pmiwaj7b1ofn', 'EKKZCDTL7IiNUqra')
 token = process.env.IN_TOKEN;
 
 jasmine.getEnv().defaultTimeoutInterval = 20000;
