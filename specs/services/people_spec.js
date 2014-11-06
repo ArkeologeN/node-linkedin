@@ -12,9 +12,32 @@ linkedin = linkedin.init(token);
 
 describe('API: People Test Suite', function() {
 
-    it('should retrieve profile of current user', function(done ) {
-       linkedin.people.me(function(err, data) {
-           done();
-       });
+    it('should retrieve profile of current user', function(done) {
+        linkedin.people.me(function(err, data) {
+            done();
+        });
     });
-})
+
+    it('should invite someone to connect', function(done) {
+        linkedin.people.invite({
+            "recipients": {
+                "values": [{
+                    "person": {
+                        "_path": "/people/email=glavin.wiechert@gmail.com",
+                        "first-name": "Glavin",
+                        "last-name": "Wiechert"
+                    }
+                }]
+            },
+            "subject": "Invitation to connect.",
+            "body": "Say yes!",
+            "item-content": {
+                "invitation-request": {
+                    "connect-type": "friend"
+                }
+            }
+        }, function(err, data) {
+            done();
+        });
+    });
+});
