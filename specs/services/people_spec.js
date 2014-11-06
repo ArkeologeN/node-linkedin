@@ -37,7 +37,7 @@ describe('API: People Test Suite', function() {
                 }
             }
         }, function(err, data) {
-            console.log(err, data);
+            done();
         });
     });
 });
