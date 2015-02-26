@@ -42,11 +42,17 @@ var linkedin = Linkedin.init('my_access_token', {
 We regret to use 1.0 for authentication and linkedin also supports 2.0. So lets start using it. The below example is inspired from `express.js` but good enough to give the walkthrough.
 
 ```javascript
+// Using a library like `expressjs` the module will 
+// redirect for you simply by passing `res`.
 app.get('/oauth/linkedin', function(req, res) {
     // This will ask for permisssions etc and redirect to callback url.
     Linkedin.auth.authorize(res, ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages']);
 });
 
+// otherwise you can leave `res` out, and the module will respond with the redirect url
+Linkedin.auth.authorize(['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages']);
+
+// Again, `res` is optional, you could pass `code` as the first parameter
 app.get('/oauth/linkedin/callback', function(req, res) {
     Linkedin.auth.getAccessToken(res, req.query.code, function(err, results) {
         if ( err )
