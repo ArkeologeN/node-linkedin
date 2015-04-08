@@ -60,4 +60,13 @@ describe('API: Companies Test Suite', function() {
             done();
         });
     });
+
+    it('should get recent company updates by company id', function (done) {
+        linkedin.companies.updates(1337, function (err, updates) {
+          expect(err).toBe(null);
+          expect(updates).not.toBe(null);
+          expect(typeof updates).toBe('object');
+          done();
+        });
+    });
 });
