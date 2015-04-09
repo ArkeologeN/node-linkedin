@@ -27,9 +27,10 @@
         });
 
         it('should have `init` and export services', function() {
-          console.log(LinkedIn.init());
           expect(LinkedIn.init).be.an.an.instanceOf(Function);
-
+          var ctx = LinkedIn.init('sample_token');
+          console.log(typeof ctx.companies);
+          // expect(ctx.companies).to.be.an.instanceOf(Function);
         });
       });
     });
