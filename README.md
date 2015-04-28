@@ -42,7 +42,7 @@ var linkedin = Linkedin.init('my_access_token', {
 We regret to use 1.0 for authentication and linkedin also supports 2.0. So lets start using it. The below example is inspired from `express.js` but good enough to give the walkthrough.
 
 ```javascript
-// Using a library like `expressjs` the module will 
+// Using a library like `expressjs` the module will
 // redirect for you simply by passing `res`.
 app.get('/oauth/linkedin', function(req, res) {
     // This will ask for permisssions etc and redirect to callback url.
@@ -53,11 +53,12 @@ app.get('/oauth/linkedin', function(req, res) {
 Linkedin.auth.authorize(['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages']);
 
 // Again, `res` is optional, you could pass `code` as the first parameter
+// Be sure to pass the `state` parameter to verify no CSRF intrusion, see [step 2 here](https://developer.linkedin.com/docs/oauth2)
 app.get('/oauth/linkedin/callback', function(req, res) {
-    Linkedin.auth.getAccessToken(res, req.query.code, function(err, results) {
+    Linkedin.auth.getAccessToken(res, req.query.code, req.query.state, function(err, results) {
         if ( err )
             return console.error(err);
-        
+
         /**
          * Results have something like:
          * {"expires_in":5184000,"access_token":". . . ."}
@@ -120,7 +121,7 @@ linkedin.people.me(['id', 'first-name', 'last-name'], function(err, $in) {
 
 ```javascript
 linkedin.people.url('long_public_url_here', function(err, $in) {
-    // Returns dob, education 
+    // Returns dob, education
 });
 
 OR
