@@ -72,6 +72,21 @@ app.get('/oauth/linkedin/callback', function(req, res) {
 
 However if you do not use express or any library which has `redirect` method available on `res` argument then you could make it optional and the function would return `url` to be executed instead and then you could use that to handle `HTTP redirect` from your own.
 
+## Companies Search
+
+Supports all the calls as per the documentation available at LinkedIn Companies Search API
+
+```javascript
+
+linkedin.companies_search.name('facebook', 1, function(err, company) {
+    name = company.companies.values[0].name;
+    desc = company.companies.values[0].description;
+    industry = company.companies.values[0].industries.values[0].name;
+    city = company.companies.values[0].locations.values[0].address.city;
+    websiteUrl = company.companies.values[0].websiteUrl;
+});
+```
+
 ## Companies
 
 Supports all the calls as per the documentation available at: [LinkedIn Companies API](http://developer.linkedin.com/documents/company-lookup-api-and-fields).
