@@ -21,6 +21,11 @@ this will install the module and add the entry in `package.json`. Lets start usi
 ```javascript
 var Linkedin = require('node-linkedin')('api', 'secret', 'callback');
 ```
+If you need to specify state, pass custom state parameter.
+
+```javascript
+var Linkedin = require('node-linkedin')('api', 'secret', 'callback', 'state');
+```
 
 Before invoking any endpoint, please get the instance ready with your access token.
 
