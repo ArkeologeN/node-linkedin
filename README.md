@@ -26,6 +26,10 @@ If you need to specify state, pass custom state parameter.
 ```javascript
 var Linkedin = require('node-linkedin')('api', 'secret', 'callback', 'state');
 ```
+Sometimes, you need to know if user is coming from mobile or web app, so you can specify multiple state params
+```javascript
+var Linkedin = require('node-linkedin')('api', 'secret', 'callback', ['state1', 'state2']);
+```
 
 Before invoking any endpoint, please get the instance ready with your access token.
 
@@ -56,6 +60,9 @@ app.get('/oauth/linkedin', function(req, res) {
 
 // otherwise you can leave `res` out, and the module will respond with the redirect url
 Linkedin.auth.authorize(['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages']);
+
+// if you have specified custom accepted state params, don't forget to include one in authorize function.
+Linkedin.auth.authorize(res, ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages'], 'state1');
 
 // Again, `res` is optional, you could pass `code` as the first parameter
 // Be sure to pass the `state` parameter to verify no CSRF intrusion, see [step 2 here](https://developer.linkedin.com/docs/oauth2)
