@@ -19,16 +19,16 @@ Just like others, its simple and quick as per standard:
 this will install the module and add the entry in `package.json`. Lets start using it!
 
 ```javascript
-var Linkedin = require('node-linkedin')('api', 'secret', 'callback');
+var Linkedin = require('node-linkedin')('app-id', 'secret', 'callback');
 ```
-If you need to specify state, pass custom state parameter.
+You may omit the callback URL. However, you must set it later before requesting
+an authorization code.
+(This is useful if the callback URL depends on the request (e.g. from multiple domains.)
 
 ```javascript
-var Linkedin = require('node-linkedin')('api', 'secret', 'callback', 'state');
-```
-Sometimes, you need to know if user is coming from mobile or web app, so you can specify multiple state params
-```javascript
-var Linkedin = require('node-linkedin')('api', 'secret', 'callback', ['state1', 'state2']);
+var Linkedin = require('node-linkedin')('app-id', 'secret');
+// ...
+Linkedin.auth.setCallback('callback-url');
 ```
 
 Before invoking any endpoint, please get the instance ready with your access token.
@@ -46,26 +46,71 @@ var linkedin = Linkedin.init('my_access_token', {
 });
 ```
 
-## OAuth 2.0
+## Requesting an Authorization Code
 
-We regret to use 1.0 for authentication and linkedin also supports 2.0. So lets start using it. The below example is inspired from `express.js` but good enough to give the walkthrough.
+#### OAuth 2.0
+
+Since LinkedIn supports OAuth 2.0 (and we regret to use 1.0 for authentication),
+let's start using it.
+
+The example below uses a routing library like `Express`. It is not required
+to use this module, but it's good enough to give a quick walkthrough.
 
 ```javascript
 // Using a library like `expressjs` the module will
 // redirect for you simply by passing `res`.
 app.get('/oauth/linkedin', function(req, res) {
     // This will ask for permisssions etc and redirect to callback url.
-    Linkedin.auth.authorize(res, ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages']);
+    Linkedin.auth.authorize(res, scope);
 });
+```
 
-// otherwise you can leave `res` out, and the module will respond with the redirect url
-Linkedin.auth.authorize(['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages']);
+Alternatively, you can leave `res` out, and the module will respond with the redirect url
+which you can use to send the `HTTP redirect` on your own.
+```javascript
+var auth_url = Linkedin.auth.authorize(scope);
+```
 
-// if you have specified custom accepted state params, don't forget to include one in authorize function.
-Linkedin.auth.authorize(res, ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages'], 'state1');
+You may specify a custom state parameter:
+```javascript
+Linkedin.auth.authorize(res, scope, 'state');
+```
 
+#### Callback URL
+
+If you have multiple domains pointing to the same application, you will need to
+set the callback URL based on the domain that is making the request.
+
+```javascript
+app.get('/oauth/linkedin', function(req, res) {
+    // set the callback url
+    Linkedin.setCallback(req.protocol + '://' + req.headers.host + '/oauth/linkedin/callback');
+    Linkedin.auth.authorize(res, scope);
+}
+```
+
+#### Scope
+The `scope` previously mentioned refers to the data from LinkedIn to which your
+application is requesting access.
+This depends on your application's permissions registered with LinkedIn.
+
+```javascript
+var scope = ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages'];
+```
+Note: The scope need not be static.
+
+## Requesting an Access Token
+
+After the user is redirected to LinkedIn to authenticate, they are redirected to
+your application's callback URL (whether they accept or decline authorization).
+See the end of Step 2 on the
+[LinkedIn OAuth 2.0 Documentation](https://developer.linkedin.com/docs/oauth2).
+
+If they accept, be sure to pass the `state` parameter to verify no CSRF
+intrusion. This is compared against the state parameter used in authentication.
+
+```javascript
 // Again, `res` is optional, you could pass `code` as the first parameter
-// Be sure to pass the `state` parameter to verify no CSRF intrusion, see [step 2 here](https://developer.linkedin.com/docs/oauth2)
 app.get('/oauth/linkedin/callback', function(req, res) {
     Linkedin.auth.getAccessToken(res, req.query.code, req.query.state, function(err, results) {
         if ( err )
@@ -80,18 +125,6 @@ app.get('/oauth/linkedin/callback', function(req, res) {
         return res.redirect('/');
     });
 });
-```
-
-However if you do not use express or any library which has `redirect` method available on `res` argument then you could make it optional and the function would return `url` to be executed instead and then you could use that to handle `HTTP redirect` from your own.
-
-If you have multiple domains pointing to the same application, you
-might want to change the callback url based on the domain that is making
-the request.
-```javascript
-app.get('/oauth/linkedin', function(req, res) {
-    //Change callback url
-    Linkedin.setCallback(req.protocol + '://' + req.headers.host + '/oauth/linkedin/callback');
-    Linkedin.auth.authorize(res, ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages']);
 ```
 
 ## Companies Search
