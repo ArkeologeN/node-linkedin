@@ -69,4 +69,22 @@ describe('API: Companies Test Suite', function() {
           done();
         });
     });
+    
+    it('should should share a company update by company id', function (done) {
+        linkedin.companies.share(2414183, {
+            "comment": "Check out the LinkedIn Pages Share API!",
+            "content": {
+                "title": " LinkedIn Developers Documentation On Using the Share API ",
+                "description": " Leverage the Share API to maximize engagement on user-generated content on LinkedIn",
+                "submitted-url": " https://developer.linkedin.com/docs/company-pages ",
+                "submitted-image-url": " https://m3.licdn.com/media/p/3/000/124/1a6/089a29a.png"
+            },
+            "visibility": { "code": "anyone" }
+          }, function (err, share) {
+          expect(err).toBe(null);
+          expect(share).not.toBe(null);
+          expect(typeof share).toBe('object');
+          done();
+        });
+    });
 });
