@@ -21,6 +21,33 @@ describe('API: Companies Test Suite', function() {
         });
     });
 
+    it('should get the statistics for a company by the given id', function(done) {
+        linkedin.companies.company_stats('162479', function(err, company) {
+            expect(err).toBe(null);
+            expect(company).not.toBe(null);
+            expect(typeof company).toBe('object');
+            done();
+        });
+    });
+
+    it('should get the historical follower count for a company by the given id', function(done) {
+        linkedin.companies.company_historical_follower_stats('162479', 1418117379000, 1449665843000, function(err, company) {
+            expect(err).toBe(null);
+            expect(company).not.toBe(null);
+            expect(typeof company).toBe('object');
+            done();
+        });
+    });
+
+    it('should get the historical impressions count for a company by the given id', function(done) {
+        linkedin.companies.company_historical_status_update_stats('162479', 1418117379000, 1449665843000, function(err, company) {
+            expect(err).toBe(null);
+            expect(company).not.toBe(null);
+            expect(typeof company).toBe('object');
+            done();
+        });
+    });
+
     it('should get company by universal name', function(done) {
         linkedin.companies.name('facebook', function(err, company) {
             expect(err).toBe(null);
