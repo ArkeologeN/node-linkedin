@@ -21,6 +21,33 @@ describe('API: Companies Test Suite', function() {
         });
     });
 
+    it('should get the statistics for a company by the given id', function(done) {
+        linkedin.companies.company_stats('162479', function(err, company) {
+            expect(err).toBe(null);
+            expect(company).not.toBe(null);
+            expect(typeof company).toBe('object');
+            done();
+        });
+    });
+
+    it('should get the historical follower count for a company by the given id', function(done) {
+        linkedin.companies.company_historical_follower_stats('162479', 1418117379000, 1449665843000, function(err, company) {
+            expect(err).toBe(null);
+            expect(company).not.toBe(null);
+            expect(typeof company).toBe('object');
+            done();
+        });
+    });
+
+    it('should get the historical impressions count for a company by the given id', function(done) {
+        linkedin.companies.company_historical_status_update_stats('162479', 1418117379000, 1449665843000, function(err, company) {
+            expect(err).toBe(null);
+            expect(company).not.toBe(null);
+            expect(typeof company).toBe('object');
+            done();
+        });
+    });
+
     it('should get company by universal name', function(done) {
         linkedin.companies.name('facebook', function(err, company) {
             expect(err).toBe(null);
@@ -66,6 +93,24 @@ describe('API: Companies Test Suite', function() {
           expect(err).toBe(null);
           expect(updates).not.toBe(null);
           expect(typeof updates).toBe('object');
+          done();
+        });
+    });
+    
+    it('should should share a company update by company id', function (done) {
+        linkedin.companies.share(2414183, {
+            "comment": "Check out the LinkedIn Pages Share API!",
+            "content": {
+                "title": " LinkedIn Developers Documentation On Using the Share API ",
+                "description": " Leverage the Share API to maximize engagement on user-generated content on LinkedIn",
+                "submitted-url": " https://developer.linkedin.com/docs/company-pages ",
+                "submitted-image-url": " https://m3.licdn.com/media/p/3/000/124/1a6/089a29a.png"
+            },
+            "visibility": { "code": "anyone" }
+          }, function (err, share) {
+          expect(err).toBe(null);
+          expect(share).not.toBe(null);
+          expect(typeof share).toBe('object');
           done();
         });
     });
