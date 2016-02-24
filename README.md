@@ -167,6 +167,14 @@ linkedin.companies.multiple('162479,universal-name=linkedin', function(err, comp
 linkedin.companies.asAdmin(function(err, companies) {
     // Here you go
 });
+
+linkedin.companies.updates('162479', function(err, company) {
+    // Gets all the updates(Posts) along with their details of a company
+});
+
+linkedin.companies.getUpdate('162479','UPDATE-c1337-998877665544332211',function(err, companies) {
+    // Gets the detail of a single update(Post) of a company
+});
 ```
 
 ## Profile

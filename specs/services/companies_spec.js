@@ -96,6 +96,15 @@ describe('API: Companies Test Suite', function() {
           done();
         });
     });
+
+    it('should get recent company updates by company id', function (done) {
+        linkedin.companies.getUpdate(1337, 'UPDATE-c1337-998877665544332211', function (err, updates) {
+          expect(err).toBe(null);
+          expect(updates).not.toBe(null);
+          expect(typeof updates).toBe('object');
+          done();
+        });
+    });
     
     it('should should share a company update by company id', function (done) {
         linkedin.companies.share(2414183, {
