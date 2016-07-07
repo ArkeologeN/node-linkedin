@@ -6,17 +6,17 @@ Another Linkedin wrapper in Node.js
 [![NPM](https://nodei.co/npm/node-linkedin.png)](https://nodei.co/npm/node-linkedin/)
 
 ### Why?
-Good question! Because when I started to use LinkedIn API, I found couple of wrappers but they were not compatible with OAuth2.0, there contributors didn't made any recent commit from several months and I had to utilize the whole wrapper with nice helper functions as well.
+Good question! Because when I started to use LinkedIn API, I found couple of wrappers but they were not compatible with OAuth2.0, their contributors hadn't made any recent commits for several months and I had to utilize the whole wrapper with nice helper functions as well.
 
-So, I decided to write another wrapper. We need it! So we can also maintain it! However, pull request are always major and we'd love to see that!
+So, I decided to write another wrapper. We need it! So we can also maintain it! However, pull requests are always major and we'd love to see that!
 
 ### Getting Started
 
-Just like others, its simple and quick as per standard:
+Just like others, it's simple and quick as per standard:
 
 [![NPM](https://nodei.co/npm/node-linkedin.png?mini=true)](https://nodei.co/npm/node-linkedin/)
 
-this will install the module and add the entry in `package.json`. Lets start using it!
+this will install the module and add the entry in `package.json`. Let's start using it!
 
 ```javascript
 var Linkedin = require('node-linkedin')('app-id', 'secret', 'callback');
