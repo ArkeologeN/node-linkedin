@@ -1,5 +1,6 @@
 node-linkedin
 ==============
+[![Dependency Status](https://david-dm.org/ArkeologeN/node-linkedin/status.svg?style=flat)](https://david-dm.org/ArkeologeN/node-linkedin)[![Known Vulnerabilities](https://snyk.io/test/npm/node-linkedin/badge.svg)](https://snyk.io/test/npm/node-linkedin)
 
 Another Linkedin wrapper in Node.js
 
