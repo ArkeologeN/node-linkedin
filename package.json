@@ -26,7 +26,7 @@
   "homepage": "https://github.com/ArkeologeN/node-linkedin",
   "dependencies": {
     "lodash": "~2.4.1",
-    "request": "~2.31.0",
+    "request": "^2.74.0",
     "oauth": "~0.9.12"
   }
 }
