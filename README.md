@@ -39,11 +39,14 @@ var linkedin = Linkedin.init('my_access_token');
 // Now, you're ready to use any endpoint
 ```
 
-Additionally, you can specify options. Currently, the only supported option is `timeout`, allowing you to specific a timeout (in ms) for the HTTP request. The default is 60 seconds (a value of 60000).
+Additionally, you can specify options. The following options are supported:
+- `timeout`: allows you to specific a timeout (in ms) for the HTTP request. The default is 60 seconds (a value of 60000).
+- `useMobileSdk`: allows using access token received from mobile sdk. The default is false.
 
 ```javascript
 var linkedin = Linkedin.init('my_access_token', {
-    timeout: 10000 /* 10 seconds */
+    timeout: 10000 /* 10 seconds */,
+    useMobileSdk: true
 });
 ```
 
