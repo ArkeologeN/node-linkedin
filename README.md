@@ -41,12 +41,13 @@ var linkedin = Linkedin.init('my_access_token');
 
 Additionally, you can specify options. The following options are supported:
 - `timeout`: allows you to specific a timeout (in ms) for the HTTP request. The default is 60 seconds (a value of 60000).
-- `useMobileSdk`: allows using access token received from mobile sdk. The default is false.
+- `clientToken`: set to true when using client-side access tokens.  The default is false.
+  - Attempting to use a client-side access token without enabling this option will cause the apis to return the error **Unable to verify access token**
 
 ```javascript
 var linkedin = Linkedin.init('my_access_token', {
     timeout: 10000 /* 10 seconds */,
-    useMobileSdk: true
+    clientToken: true
 });
 ```
 
