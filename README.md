@@ -41,7 +41,7 @@ var linkedin = Linkedin.init('my_access_token');
 
 Additionally, you can specify options. The following options are supported:
 - `timeout`: allows you to specific a timeout (in ms) for the HTTP request. The default is 60 seconds (a value of 60000).
-- `clientToken`: set to true when using client-side access tokens.  The default is false.
+- `mobileToken`: set to true when using an access token received by the LinkedIn Mobile SDK.  The default is false.
   - See **Using Access Tokens from Mobile SDK** below for more info
 
 ```javascript
