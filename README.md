@@ -42,12 +42,11 @@ var linkedin = Linkedin.init('my_access_token');
 Additionally, you can specify options. The following options are supported:
 - `timeout`: allows you to specific a timeout (in ms) for the HTTP request. The default is 60 seconds (a value of 60000).
 - `clientToken`: set to true when using client-side access tokens.  The default is false.
-  - Attempting to use a client-side access token without enabling this option will cause the apis to return the error **Unable to verify access token**
+  - See **Using Access Tokens from Mobile SDK** below for more info
 
 ```javascript
 var linkedin = Linkedin.init('my_access_token', {
-    timeout: 10000 /* 10 seconds */,
-    clientToken: true
+    timeout: 10000 /* 10 seconds */
 });
 ```
 
@@ -268,6 +267,15 @@ linkedin.group.feeds(3769732, ['field', 'field2', 'field3'], {order: 'popularity
     // data: variable is ready to use.
 });
 ```
+
+## Using Access Tokens from Mobile SDK (experimental)
+**NOTE**: This feature uses an undocumented workaround for accessing the LinkedIn API.  As such, this feature may not work in future releases.
+
+Per the [LinkedIn docs](https://developer.linkedin.com/docs/android-sdk-auth):
+
+> It is important to note that access tokens that are acquired via the Mobile SDK are only usable with the Mobile SDK, and cannot be used to make server-side REST API calls.  Similarly, access tokens that you already have stored from your users that authenticated using a server-side REST API call will not work with the Mobile SDK.
+
+As such, attempting to use a mobile access token with this library will cause the REST API calls to return the error **Unable to verify access token**.  It was discovered that there is a workaround for this issue by changing the way in which this library authenticates with the LinkedIn API.  This functionality is controlled via the `clientToken` option and must be enabled when using an access token received by the Mobile SDK.
 
 ## Author
 
