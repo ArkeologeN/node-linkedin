@@ -275,7 +275,7 @@ Per the [LinkedIn docs](https://developer.linkedin.com/docs/android-sdk-auth):
 
 > It is important to note that access tokens that are acquired via the Mobile SDK are only usable with the Mobile SDK, and cannot be used to make server-side REST API calls.  Similarly, access tokens that you already have stored from your users that authenticated using a server-side REST API call will not work with the Mobile SDK.
 
-As such, attempting to use a mobile access token with this library will cause the REST API calls to return the error **Unable to verify access token**.  It was discovered that there is a workaround for this issue by changing the way in which this library authenticates with the LinkedIn API.  This functionality is controlled via the `clientToken` option and must be enabled when using an access token received by the Mobile SDK.
+As such, attempting to use a mobile access token with this library will cause the REST API calls to return the error **Unable to verify access token**.  It was discovered that there is a workaround for this issue by changing the way in which this library authenticates with the LinkedIn API.  This functionality is controlled via the `mobileToken` option and must be enabled when using an access token received by the Mobile SDK.
 
 ## Author
 
