@@ -1,32 +1,31 @@
 {
   "name": "node-linkedin",
-  "version": "0.5.6",
-  "description": "LinkedIn 2.0 compatible wrapper in node.js",
-  "main": "lib/main",
+  "version": "0.10.0",
+  "description": "API Wrapper on LinkedIn RESTful service",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm test"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:ArkeologeN/node-linkedin.git"
+    "url": "git+https://github.com/ArkeologeN/node-linkedin.git"
   },
   "keywords": [
     "linkedin",
-    "wrapper",
+    "node-linkedin",
+    "linkedin",
     "api"
   ],
-  "author": {
-    "name": "Hamza Waqas",
-    "email": "hamzawaqas.programmer@gmail.com"
-  },
+  "author": "hamzawaqas.programmer@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ArkeologeN/node-linkedin/issues"
   },
-  "homepage": "https://github.com/ArkeologeN/node-linkedin",
-  "dependencies": {
-    "lodash": "^4.17.4",
-    "oauth": "~0.9.12",
-    "request": "^2.74.0"
-  }
+  "homepage": "https://github.com/ArkeologeN/node-linkedin#readme"
 }
