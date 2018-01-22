@@ -7,10 +7,16 @@
     "lib": "lib",
     "test": "tests"
   },
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "request-promise-native": "^1.0.5"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.0",
+    "sinon": "^4.2.0"
+  },
   "scripts": {
-    "test": "npm test"
+    "test": "./node_modules/.bin/_mocha --bail --color --timeout 50000 tests/**/*"
   },
   "repository": {
     "type": "git",
