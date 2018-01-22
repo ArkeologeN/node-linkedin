@@ -1,5 +1,6 @@
 const nock = require('nock');
 const chai = require('chai');
+const sinon = require('sinon');
 const expect = chai.expect;
 const Configuration = require('../../src/configuration');
 const ApiService = require('../../src/apiService');
@@ -23,14 +24,15 @@ describe('#apiService', () => {
     expect(apiService).to.have.deep.property('request');
   });
   
+  it('should have a getter for `get`', () => {
+    expect(apiService.get).to.be.a('function');
+  });
+  
   it('should have initialized `apiCall` property', () => {
     expect(apiService.apiCall).to.be.a('function');
   });
   
   context('When getter `request` is called', () => {
-    beforeEach(() => {
-    
-    });
     
     it('should export a function over context', () => {
       expect(apiService.request).to.be.a('function');
@@ -70,7 +72,7 @@ describe('#apiService', () => {
         expect(inRequestNock.isDone()).to.equal(true);
       });
     });
-  
+    
     context('When token version is `2` and type is `server`', () => {
       let [inRequestNock, accessToken] = [{}, {}];
       before(() => {
@@ -91,13 +93,13 @@ describe('#apiService', () => {
             hello: 'world'
           });
       });
-    
+      
       it('should place token in header', async () => {
         await apiService.request({url: '/'});
         expect(inRequestNock.isDone()).to.equal(true);
       });
     });
-  
+    
     context('When token version is `2` and type is NOT `server`', () => {
       let [inRequestNock, accessToken] = [{}, {}];
       before(() => {
@@ -120,11 +122,36 @@ describe('#apiService', () => {
             hello: 'world'
           });
       });
-    
+      
       it('should place token in header', async () => {
         await apiService.request({url: '/'});
         expect(inRequestNock.isDone()).to.equal(true);
       });
+    });
+  });
+  
+  context('When getter `get` is called', () => {
+    let sandbox;
+    beforeEach(() => {
+      sandbox = sinon.createSandbox();
+      const requestStub = sinon.stub();
+      sandbox.stub(apiService, 'request').value(requestStub);
+    });
+    afterEach(() => {
+      sandbox.restore();
+    });
+    
+    it('should invoke `request` getter with method: GET', async () => {
+      const [url, opts] = ['/', {format: 'xml'}];
+      await apiService.get({url, opts});
+      expect(apiService.request.callCount).to.equal(1);
+      expect(apiService.request.args).to.deep.equal([[
+        {
+          method: 'GET',
+          url,
+          opts
+        }
+      ]]);
     });
   });
 });
