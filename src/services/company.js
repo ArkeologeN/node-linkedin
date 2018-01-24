@@ -27,6 +27,25 @@ class Company extends APIService {
     const url = `/companies/${id}:(${this.fields.join(',')})`;
     return this.get({url});
   }
+  
+  stats(id) {
+    const url = `/companies/${id}/company-statistics`;
+    return this.get({url});
+  }
+  
+  followerStats({id, start, end}) {
+    let url = `/companies/${id}/historical-follow-statistics`;
+    if (start || end) {
+      url += `?time-granularity=day`;
+    }
+    if (start) {
+      url += `&start-timestamp=${start}`;
+    }
+    if (end) {
+      url += `&end-timestamp=${end}`;
+    }
+    return this.get({url});
+  }
 }
 
 module.exports = Company;
