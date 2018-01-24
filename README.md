@@ -6,6 +6,10 @@ Another Linkedin wrapper in Node.js
 
 [![NPM](https://nodei.co/npm/node-linkedin.png)](https://nodei.co/npm/node-linkedin/)
 
+### IMPORTANT
+
+I'm rewriting this project with latest-code paradigms and promises in [node-linkedin@v2.0](https://github.com/ArkeologeN/node-linkedin/tree/v2.0). There is no deadline or ballpark of release, but I hope to roll it out in upcoming months. It would support ECMA6 classes so that you may extend them in your source code if need to extend an API.
+
 ### Why?
 Good question! Because when I started to use LinkedIn API, I found couple of wrappers but they were not compatible with OAuth2.0, their contributors hadn't made any recent commits for several months and I had to utilize the whole wrapper with nice helper functions as well.
 
