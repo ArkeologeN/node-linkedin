@@ -46,6 +46,20 @@ class Company extends APIService {
     }
     return this.get({url});
   }
+  
+  statusUpdateStats({id, start, end}) {
+    let url = `/companies/${id}/historical-status-update-statistics`;
+    if (start || end) {
+      url += `?time-granularity=day`;
+    }
+    if (start) {
+      url += `&start-timestamp=${start}`;
+    }
+    if (end) {
+      url += `&end-timestamp=${end}`;
+    }
+    return this.get({url});
+  }
 }
 
 module.exports = Company;

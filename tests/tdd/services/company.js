@@ -48,6 +48,10 @@ describe.only('#company', () => {
     it('should have a method `followerStats`', () => {
       expect(company.followerStats).to.be.a('function');
     });
+  
+    it('should have a method `statusUpdateStats`', () => {
+      expect(company.statusUpdateStats).to.be.a('function');
+    });
     
     context('When setter `fields` is called', () => {
       const expectedFields = ['id'];
@@ -160,6 +164,64 @@ describe.only('#company', () => {
         const end = +new Date();
         const expectedUrl = `/companies/${fakeId}/historical-follow-statistics?time-granularity=day&start-timestamp=${start}&end-timestamp=${end}`;
         await company.followerStats({id: fakeId, start, end});
+        expect(company.request.args).to.deep.equal([
+          [
+            {
+              method: 'GET',
+              opts: {},
+              url: expectedUrl
+            }
+          ]
+        ]);
+      });
+    });
+  
+    context('When `statusUpdateStats` method is called', () => {
+      let sandbox;
+      const fakeId = 'fake-id';
+      beforeEach(() => {
+        sandbox = sinon.createSandbox();
+        const requestStub = sinon.stub();
+        sandbox.stub(company, 'request').value(requestStub);
+      });
+      afterEach(() => {
+        sandbox.restore();
+      });
+    
+      it('should call `request` with id', async () => {
+        const expectedUrl = `/companies/${fakeId}/historical-status-update-statistics`;
+        await company.statusUpdateStats({id: fakeId});
+        expect(company.request.args).to.deep.equal([
+          [
+            {
+              method: 'GET',
+              opts: {},
+              url: expectedUrl
+            }
+          ]
+        ]);
+      });
+    
+      it('should call `request` with id and start.', async () => {
+        const start = +new Date();
+        const expectedUrl = `/companies/${fakeId}/historical-status-update-statistics?time-granularity=day&start-timestamp=${start}`;
+        await company.statusUpdateStats({id: fakeId, start: start});
+        expect(company.request.args).to.deep.equal([
+          [
+            {
+              method: 'GET',
+              opts: {},
+              url: expectedUrl
+            }
+          ]
+        ]);
+      });
+    
+      it('should call `request` with id, start and end.', async () => {
+        const start = +new Date();
+        const end = +new Date();
+        const expectedUrl = `/companies/${fakeId}/historical-status-update-statistics?time-granularity=day&start-timestamp=${start}&end-timestamp=${end}`;
+        await company.statusUpdateStats({id: fakeId, start, end});
         expect(company.request.args).to.deep.equal([
           [
             {
