@@ -53,6 +53,10 @@ describe.only('#company', () => {
       expect(company.statusUpdateStats).to.be.a('function');
     });
     
+    it('should have a method `name`', () => {
+      expect(company.name).to.be.a('function');
+    });
+    
     context('When setter `fields` is called', () => {
       const expectedFields = ['id'];
       beforeEach(() => {
@@ -79,6 +83,33 @@ describe.only('#company', () => {
       it('should call `request` with correct parameters', async () => {
         const expectedUrl = `/companies/${fakeId}:(${company.fields.join(',')})`;
         await company.id(fakeId);
+        expect(company.request.args).to.deep.equal([
+          [
+            {
+              method: 'GET',
+              opts: {},
+              url: expectedUrl
+            }
+          ]
+        ]);
+      });
+    });
+  
+    context('When `name` method is called', () => {
+      let sandbox;
+      const name = 'fake-name';
+      beforeEach(() => {
+        sandbox = sinon.createSandbox();
+        const requestStub = sinon.stub();
+        sandbox.stub(company, 'request').value(requestStub);
+      });
+      afterEach(() => {
+        sandbox.restore();
+      });
+    
+      it('should call `request` with correct parameters', async () => {
+        const expectedUrl = `/companies/universal-name=${name}:(${company.fields.join(',')})`;
+        await company.name(name);
         expect(company.request.args).to.deep.equal([
           [
             {

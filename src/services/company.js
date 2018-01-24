@@ -28,6 +28,11 @@ class Company extends APIService {
     return this.get({url});
   }
   
+  name(name) {
+    const url = `/companies/universal-name=${name.split(' ').join('-')}:(${this.fields.join(',')})`;
+    return this.get({url});
+  }
+  
   stats(id) {
     const url = `/companies/${id}/company-statistics`;
     return this.get({url});
