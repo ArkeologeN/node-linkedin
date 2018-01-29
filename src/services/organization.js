@@ -24,12 +24,22 @@ class Company extends APIService {
 	}
 
 	id(id) {
-		const url = `/companies/${id}:(${this.fields.join(',')})`;
+		const url = `/organizations/${id}`;
 		return this.get({url});
 	}
 
-	name(name) {
-		const url = `/companies/universal-name=${name.split(' ').join('-')}:(${this.fields.join(',')})`;
+	vanityName(name) {
+		const url = `/organizations?q=vanityName&vanityName=${name}`;
+		return this.get({url});
+	}
+
+	emailDomain(domain) {
+		const url = `/organizations?q=emailDomain&emailDomain=${domain}`;
+		return this.get({url});
+	}
+
+	associatedWithMember(memberId) {
+		const url = `/people/id=${memberId}?fields=positions:($*:(company))`;
 		return this.get({url});
 	}
 

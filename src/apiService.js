@@ -4,7 +4,7 @@ const Configuration = require('./configuration');
 class APIService {
 
 	constructor() {
-		this.baseUrl = 'https://api.linkedin.com/v1';
+		this.baseUrl = 'https://api.linkedin.com/v2';
 		this.apiCall = request.defaults({
 			baseUrl: this.baseUrl
 		});
@@ -17,7 +17,7 @@ class APIService {
 	 */
 	get request() {
 		return ({method = 'GET', url = '/', opts = {}, body = {}}) => {
-			const isTokenRequired = opts.tokenRequired === true;
+			const isTokenRequired = opts.tokenRequired || true;
 			const params = {
 				method,
 				url,

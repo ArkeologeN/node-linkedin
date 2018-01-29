@@ -43,7 +43,8 @@ describe('#apiService', () => {
     });
     
     it('should throw error if `accessToken` is not available.', () => {
-      expect(apiService.request.bind(apiService, [{}])).to.throw(/accessToken/);
+    	const wrapFn = () => apiService.request({});
+      expect(wrapFn).to.throw(/accessToken/);
     });
     
     context('When token version is `1`', () => {

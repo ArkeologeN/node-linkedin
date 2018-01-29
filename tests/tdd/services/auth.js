@@ -7,7 +7,7 @@ const APIService = require('../../../src/apiService');
 const Configuration = require('../../../src/configuration');
 chai.use(require('chai-as-promised'));
 
-describe.only('#auth', () => {
+describe('#auth', () => {
 
 	it('should be extended with `APIService`', () => {
 		expect(Auth.prototype).to.be.an.instanceOf(APIService);
@@ -153,7 +153,6 @@ describe.only('#auth', () => {
 
 				it('should have made POST call to api', () => {
 					expect(accessTokenNock.isDone()).to.equal(true);
-					console.log(result);
 				});
 			});
 		});
