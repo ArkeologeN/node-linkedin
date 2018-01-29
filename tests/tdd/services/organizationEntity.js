@@ -36,7 +36,7 @@ describe('#organizationEntity', () => {
     });
 
 	  context('When `memberAccessControlInfo` method is called', () => {
-		  const [role, state] = ['ADMINISTRATOR', 'APPROVED'];
+		  const [role, state, projection] = ['ADMINISTRATOR', 'APPROVED', '(elements*(*,roleAssignee~(localizedFirstName, localizedLastName), organizationalTarget~(localizedName)))'];
 
 		  it('should invoke `request` with no arguments', async () => {
 			  const expectedUrl = `/organizationalEntityAcls?q=roleAssignee`;
@@ -69,6 +69,20 @@ describe('#organizationEntity', () => {
 		  it('should invoke `request` with role & state', async () => {
 			  const expectedUrl = `/organizationalEntityAcls?q=roleAssignee&role=${role}&state=${state}`;
 			  await organizationEntity.memberAccessControlInfo({role, state});
+			  expect(organizationEntity.request.args).to.deep.equal([
+				  [
+					  {
+						  method: 'GET',
+						  opts: {},
+						  url: expectedUrl
+					  }
+				  ]
+			  ]);
+		  });
+
+		  it('should invoke `request` with role, state and projection', async () => {
+			  const expectedUrl = `/organizationalEntityAcls?q=roleAssignee&role=${role}&state=${state}&projection=${projection}`;
+			  await organizationEntity.memberAccessControlInfo({role, state, projection});
 			  expect(organizationEntity.request.args).to.deep.equal([
 				  [
 					  {

@@ -2,13 +2,16 @@ const APIService = require('../apiService');
 
 class OrganizationEntity extends APIService {
 
-	memberAccessControlInfo({role, state} = {}) {
+	memberAccessControlInfo({role, state, projection} = {}) {
 		let query = ['q=roleAssignee'];
 		if (role) {
 			query.push(`role=${role}`);
 		}
 		if (state) {
 			query.push(`state=${state}`);
+		}
+		if (projection) {
+			query.push(`projection=${projection}`);
 		}
 		let url = `/organizationalEntityAcls?` + query.join('&');
 		return this.get({url});
@@ -25,6 +28,7 @@ class OrganizationEntity extends APIService {
 		if (state) {
 			query.push(`state=${state}`);
 		}
+
 		let url = `/organizationalEntityAcls?` + query.join('&');
 		return this.get({url});
 	}
