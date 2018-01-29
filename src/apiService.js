@@ -53,6 +53,14 @@ class APIService {
       return this.request({method: 'GET', url, opts: opts || {}});
     }
   }
+
+	/**
+   * Returns the singleton instance of configuration.
+	 * @returns {Configuration}
+	 */
+  get configuration() {
+    return Configuration.getInstance();
+  }
 }
 
 module.exports = APIService;
