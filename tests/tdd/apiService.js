@@ -154,4 +154,30 @@ describe('#apiService', () => {
       ]]);
     });
   });
+
+	context('When getter `post` is called', () => {
+		let sandbox;
+		beforeEach(() => {
+			sandbox = sinon.createSandbox();
+			const requestStub = sinon.stub();
+			sandbox.stub(apiService, 'request').value(requestStub);
+		});
+		afterEach(() => {
+			sandbox.restore();
+		});
+
+		it('should invoke `request` getter with method: POST', async () => {
+			const [url, opts, body] = ['/', {}, {foo: 'bar'}];
+			await apiService.post({url, opts, body});
+			expect(apiService.request.callCount).to.equal(1);
+			expect(apiService.request.args).to.deep.equal([[
+				{
+					method: 'POST',
+					url,
+					opts,
+					body
+				}
+			]]);
+		});
+	});
 });

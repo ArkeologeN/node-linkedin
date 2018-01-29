@@ -20,9 +20,13 @@ describe.only('#auth', () => {
 			auth = new Auth();
 		});
 
-		it('should have a method `getAuthorizationUrl()', () => {
+		it('should have a metho' +
+			'd `getAuthorizationUrl()', () => {
 			expect(auth.getAuthorizationUrl).to.be.a('function');
 		});
+		it('should have a method `getAccessToken', () => {
+			expect(auth.getAccessToken).to.be.a('function');
+		})
 
 		context('When method `getAuthorizationUrl` is called', () => {
 
@@ -85,6 +89,71 @@ describe.only('#auth', () => {
 						`scope=${encodeURIComponent(scopes)}`,
 						`redirect_uri=${encodeURIComponent(redirectUri)}`].join('&');
 					expect(url).to.equal(expectedUrl);
+				});
+			});
+		});
+
+		context('When method `getAccessToken` is called', () => {
+			[
+				{
+					title: 'with no arguments',
+					input: {},
+					output: /(=?code)(.*required)/
+				},
+				{
+					title: 'with code but no redirectUri',
+					input: {
+						code: 'fake-code'
+					},
+					output: /(=?redirectUri)(.*required)/
+				},
+			].forEach(testCase => {
+				context(testCase.title, () => {
+					it('should raise an exception', () => {
+						const inputFn = () => auth.getAccessToken(testCase.input);
+						return expect(inputFn).to.throw(testCase.output);
+					});
+				});
+			});
+
+			context('with valid arguments', () => {
+				let [accessTokenNock, code, redirectUri, clientId, clientSecret, accessToken, expiresIn] = [
+					null,
+					'fake-code',
+					'http://local.example.com/auth/callback',
+					'fake-client-id',
+					'fake-client-secret',
+					'fake-access-token',
+					6000 * 1000
+				];
+				let result = null;
+				before(async () => {
+					Configuration
+						.getInstance()
+						.set('clientId', clientId)
+						.set('clientSecret', clientSecret);
+					accessTokenNock = nock('https://www.linkedin.com')
+						.post('/oauth/v2/accessToken', {
+							grant_type: 'authorization_code',
+							code,
+							redirect_uri: redirectUri,
+							client_id: clientId,
+							client_secret: clientSecret
+						})
+						.query({
+							format: 'json',
+							strict: false
+						})
+						.reply(200, {
+							access_token: accessToken,
+							expires_in: expiresIn
+						});
+					result = await auth.getAccessToken({code, redirectUri});
+				});
+
+				it('should have made POST call to api', () => {
+					expect(accessTokenNock.isDone()).to.equal(true);
+					console.log(result);
 				});
 			});
 		});
