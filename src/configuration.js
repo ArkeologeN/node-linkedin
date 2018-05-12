@@ -12,7 +12,7 @@ class Configuration {
 	 * @returns {function(String)}
 	 * @example
 	 *
-	 *  Configuration.getInstance().get('access_token); // returns value.
+	 *  Configuration.getInstance().value('access_token'); // returns value.
 	 */
 	get value() {
 		return (key) => {
