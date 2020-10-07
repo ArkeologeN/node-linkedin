@@ -7,7 +7,7 @@ Another Linkedin wrapper in Node.js
 [![NPM](https://nodei.co/npm/node-linkedin.png)](https://nodei.co/npm/node-linkedin/)
 
 
-### STALE
+### ---> PLEASE SAFE ME!
 
 I started this fantastic project years ago with an aim to help myself and community. Unfortunately, due to my primary job responsibilities, I can no longer maintain this project. Therefore, I am open if someone would like to be a maintainer or feel free to work and start a new one.
 
