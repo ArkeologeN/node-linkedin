@@ -6,6 +6,13 @@ Another Linkedin wrapper in Node.js
 
 [![NPM](https://nodei.co/npm/node-linkedin.png)](https://nodei.co/npm/node-linkedin/)
 
+
+### STALE
+
+I started this fantastic project years ago with an aim to help myself and community. Unfortunately, due to my primary job responsibilities, I can no longer maintain this project. Therefore, I am open if someone would like to be a maintainer or feel free to work and start a new one.
+
+Just create a ticket if you are interested to maintain this project and I will add you as an Admininstrator.
+
 ### IMPORTANT
 
 I'm rewriting this project with latest-code paradigms and promises in [node-linkedin@v2.0](https://github.com/ArkeologeN/node-linkedin/tree/v2.0). There is no deadline or ballpark of release, but I hope to roll it out in upcoming months. It would support ECMA6 classes so that you may extend them in your source code if need to extend an API.
